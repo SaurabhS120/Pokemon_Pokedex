@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Pokemon</string>
+    <string name="pokemon_name">pokemon name</string>
+    <string name="back">back</string>
+    <string name="menu">menu</string>
+    <string name="pockdex">pockdex</string>
 </resources>
