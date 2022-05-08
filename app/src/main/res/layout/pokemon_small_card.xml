@@ -32,18 +32,27 @@
             android:layout_marginStart="20sp"
             android:layout_marginTop="20sp"
             android:layout_marginBottom="20sp"
-            android:layout_marginEnd="20sp">
+            android:layout_marginEnd="100sp">
             <TextView
                 android:id="@+id/pokemaon_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/pokemon_name"
-                android:textSize="24sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/pokemonImage"
+            android:layout_width="100sp"
+            android:layout_height="100sp"
+            android:layout_marginEnd="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/pokemon_test_img"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

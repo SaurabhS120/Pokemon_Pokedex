@@ -8,6 +8,7 @@ import com.example.pokemon.databinding.ActivityPokemonListBinding
 import com.example.pokemon.domain.repoImpl.PokemonPagingRepoImpl
 import com.example.pokemon.presentation.recycler_adapter.PokemonPagingAdapter
 import com.example.pokemon.presentation.viewmodels.PokemonListViewModel
+import kotlinx.coroutines.coroutineScope
 
 class PokemonListActivity : AppCompatActivity() {
     val pokemonListViewModel : PokemonListViewModel by viewModels{
@@ -20,11 +21,10 @@ class PokemonListActivity : AppCompatActivity() {
         setContentView(pokemonListActivityBinding.root)
         supportActionBar?.hide()
         val pokemonListRecyclerView = pokemonListActivityBinding.pokemonListRecyclerView
-        val pokemonListRecyclerAdapter = PokemonPagingAdapter()
         pokemonListRecyclerView.layoutManager = GridLayoutManager(this,2)
-        pokemonListRecyclerView.adapter = pokemonListRecyclerAdapter
+        pokemonListRecyclerView.adapter = pokemonListViewModel.pokemonListRecyclerAdapter
         pokemonListViewModel.pokemonList.observe(this){
-            pokemonListRecyclerAdapter.submitData(lifecycle,it)
+            pokemonListViewModel.pokemonListRecyclerAdapter.submitData(lifecycle,it)
         }
     }
 }

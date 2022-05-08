@@ -14,6 +14,6 @@ interface PokemonApiInterface {
     @GET("pokemon/")
     suspend fun getPokemonList(@Query("offset")offset:Int,@Query("limit")limit:Int = PAGE_SIZE): PokemonResponse
 
-    @GET("pokemon/{id}")
+    @GET("pokemon/{id}/")
     suspend fun getPokemonDetails(@Path("id")id:Int) : PokemonDetailsResponse
 }

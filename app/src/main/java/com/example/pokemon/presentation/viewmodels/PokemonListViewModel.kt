@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.example.pokemon.domain.repos.PokemonPagingRepo
+import com.example.pokemon.presentation.recycler_adapter.PokemonPagingAdapter
+import kotlinx.coroutines.coroutineScope
 
 class PokemonListViewModel(pokenonPagingRepo: PokemonPagingRepo) : ViewModel() {
     class Factory(val pokenonPagingRepo: PokemonPagingRepo):ViewModelProvider.Factory{
@@ -14,4 +16,5 @@ class PokemonListViewModel(pokenonPagingRepo: PokemonPagingRepo) : ViewModel() {
 
     }
     val pokemonList = pokenonPagingRepo.getPokemons().cachedIn(viewModelScope)
+    val pokemonListRecyclerAdapter = PokemonPagingAdapter(viewModelScope)
 }
