@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PokemonListActivity">
+    tools:context=".presentation.ui.PokemonListActivity">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,13 +40,15 @@
         app:layout_constraintTop_toBottomOf="@id/top_bar_layout"
         android:textSize="36sp"
         android:textStyle="bold"/>
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pokemonListRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0sp"
+        app:layoutManager="GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/app_title"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:listitem="@layout/pokemon_small_card"
-        app:layoutManager="GridLayoutManager"
-        app:spanCount="2"/>
+        app:spanCount="2"
+        tools:listitem="@layout/pokemon_small_card" />
 </androidx.constraintlayout.widget.ConstraintLayout>
