@@ -1,5 +1,5 @@
 package com.example.pokemon.data.repoImpl
 
 object PokemonPageConfig {
-    val PAGE_SIZE = 10
+    val PAGE_SIZE = 20
 }

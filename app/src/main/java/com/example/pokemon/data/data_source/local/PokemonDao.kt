@@ -17,4 +17,7 @@ interface PokemonDao {
 
     @Query("DELETE FROM pokemons")
     suspend fun clearAll()
+
+    @Query("UPDATE pokemons SET imageBase64=:image where id=:id")
+    suspend fun updateImage(id:Int,image:String)
 }
