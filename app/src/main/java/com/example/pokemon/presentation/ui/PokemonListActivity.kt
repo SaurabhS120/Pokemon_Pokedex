@@ -1,18 +1,27 @@
 package com.example.pokemon.presentation.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.room.Room
+import com.example.pokemon.data.data_source.local.PokemonDatabase
+import com.example.pokemon.data.data_source.reomote.PokemonRetrofitAPI
+import com.example.pokemon.data.repoImpl.PokemonRepoImpl
 import com.example.pokemon.databinding.ActivityPokemonListBinding
 import com.example.pokemon.domain.repoImpl.PokemonPagingRepoImpl
-import com.example.pokemon.presentation.recycler_adapter.PokemonPagingAdapter
 import com.example.pokemon.presentation.viewmodels.PokemonListViewModel
-import kotlinx.coroutines.coroutineScope
 
 class PokemonListActivity : AppCompatActivity() {
     val pokemonListViewModel : PokemonListViewModel by viewModels{
-        val pokemonPagingRepo = PokemonPagingRepoImpl()
+        val database = Room.databaseBuilder(
+            applicationContext,
+            PokemonDatabase::class.java,
+            "pokemon_database"
+        ).build()
+        val pokemonApiInterface = PokemonRetrofitAPI.getClient
+        val pokemonRepo = PokemonRepoImpl(pokemonApiInterface)
+        val pokemonPagingRepo = PokemonPagingRepoImpl(database,pokemonRepo)
         PokemonListViewModel.Factory(pokemonPagingRepo)
     }
     override fun onCreate(savedInstanceState: Bundle?) {

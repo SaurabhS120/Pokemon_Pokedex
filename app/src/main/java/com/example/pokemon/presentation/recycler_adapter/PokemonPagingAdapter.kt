@@ -1,6 +1,5 @@
 package com.example.pokemon.presentation.recycler_adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -61,4 +60,5 @@ class PokemonPagingAdapter(val coroutineScope: CoroutineScope) :
             }
         }
     }
+
 }

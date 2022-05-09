@@ -2,6 +2,7 @@ package com.example.pokemon.data.model
 
 import android.net.Uri
 import com.example.pokemon.data.repoImpl.PokemonPageConfig
+import com.example.pokemon.domain.usecases.PokemonUseCase
 
 data class PokemonResponse(
 	val next: String? = null,
@@ -16,8 +17,17 @@ data class PokemonResponse(
 	}
 }
 
-data class ResultsItem(
-	val name: String? = null,
-	val url: String? = null
-)
+class ResultsItem(
+	name: String,
+	url: String
+):PokemonUseCase(name,url){
+	fun getId():Int{
+		val urlParts = url?.split('/')
+		val pokemonId = urlParts?.get(urlParts.lastIndex-1)?.toInt()?:1
+		return pokemonId
+	}
+	init {
+	    super.id = getId()
+	}
+}
 

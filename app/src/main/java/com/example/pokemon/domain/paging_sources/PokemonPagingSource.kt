@@ -2,12 +2,10 @@ package com.example.pokemon.domain.paging_sources
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.pokemon.data.model.ResultsItem
 import com.example.pokemon.domain.converter.PokemonPageUrlToNoConverter
 import com.example.pokemon.domain.converter.PokemonResponseToUseCaseListConverter
 import com.example.pokemon.domain.entities.PokemonEntity
 import com.example.pokemon.domain.repos.PokemonRepo
-import com.example.pokemon.domain.usecases.PokemonUseCase
 
 class PokemonPagingSource(val pokemonRepo: PokemonRepo) : PagingSource<Int, PokemonEntity>() {
     var nextPageNumber:Int? = 0
