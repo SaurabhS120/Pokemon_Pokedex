@@ -51,13 +51,17 @@ class PokemonRemoteMediator(
                     // valid for initial load. If lastItem is null it means no
                     // items were loaded after the initial REFRESH and there are
                     // no more items to load.
-                    if (lastItem==null) {
+                    if (state.anchorPosition?:0>1 && lastItem==null) {
                         return MediatorResult.Success(
                             endOfPaginationReached = true
                         )
                     }
-
-                    lastItem.id
+                    else if(lastItem==null){
+                        return MediatorResult.Success(
+                            endOfPaginationReached = false
+                        )
+                    }
+                    lastItem?.id
                 }
             }
 
