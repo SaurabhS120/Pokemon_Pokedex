@@ -10,13 +10,13 @@ import com.example.pokemon.data.data_source.reomote.PokemonRetrofitAPI
 import com.example.pokemon.data.repoImpl.PokemonDetailsRepoImpl
 import com.example.pokemon.data.repoImpl.PokemonPageConfig
 import com.example.pokemon.domain.repos.PokemonPagingRepo
-import com.example.pokemon.domain.repos.PokemonRepo
+import com.example.pokemon.domain.repos.PokemonRemoteRepo
 import kotlinx.coroutines.CoroutineScope
 
 @OptIn(ExperimentalPagingApi::class)
 class PokemonPagingRepoImpl(
     val database: PokemonDatabase,
-    val networkService: PokemonRepo,
+    val networkService: PokemonRemoteRepo,
     val viewModelScope: CoroutineScope
 ) : PokemonPagingRepo {
 //    val pokemonApi:PokemonApiInterface = PokemonRetrofitAPI.getClient

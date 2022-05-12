@@ -5,15 +5,15 @@ import androidx.paging.PagingState
 import com.example.pokemon.domain.converter.PokemonPageUrlToNoConverter
 import com.example.pokemon.domain.converter.PokemonResponseToUseCaseListConverter
 import com.example.pokemon.domain.entities.PokemonEntity
-import com.example.pokemon.domain.repos.PokemonRepo
+import com.example.pokemon.domain.repos.PokemonRemoteRepo
 
-class PokemonPagingSource(val pokemonRepo: PokemonRepo) : PagingSource<Int, PokemonEntity>() {
+class PokemonPagingSource(val pokemonRemoteRepo: PokemonRemoteRepo) : PagingSource<Int, PokemonEntity>() {
     var nextPageNumber:Int? = 0
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PokemonEntity> {
         try {
             // Start refresh at page 1 if undefined.
             val nextPageNumber = params.key ?: 1
-            val response = pokemonRepo.getPokemonList(nextPageNumber)
+            val response = pokemonRemoteRepo.getPokemonList(nextPageNumber)
             this.nextPageNumber = response.next?.let {
                 PokemonPageUrlToNoConverter.convert(it)
             }

@@ -1,6 +1,5 @@
 package com.example.pokemon.data.data_source
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.paging.ExperimentalPagingApi
@@ -12,7 +11,7 @@ import com.example.pokemon.data.data_source.local.PokemonDatabase
 import com.example.pokemon.domain.converter.PngToBase64
 import com.example.pokemon.domain.entities.PokemonEntity
 import com.example.pokemon.domain.repos.PokemonDetailsRepo
-import com.example.pokemon.domain.repos.PokemonRepo
+import com.example.pokemon.domain.repos.PokemonRemoteRepo
 import kotlinx.coroutines.*
 import retrofit2.HttpException
 import java.io.IOException
@@ -21,7 +20,7 @@ import java.net.URL
 @OptIn(ExperimentalPagingApi::class)
 class PokemonRemoteMediator(
     private val database: PokemonDatabase,
-    private val networkService: PokemonRepo,
+    private val networkService: PokemonRemoteRepo,
     private val pokemonDetailsRepo: PokemonDetailsRepo,
     private val viewModelScope: CoroutineScope,
 ) : RemoteMediator<Int, PokemonEntity>() {

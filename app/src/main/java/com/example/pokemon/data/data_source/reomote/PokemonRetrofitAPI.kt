@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object PokemonRetrofitAPI {
     val BASE_URL = "https://pokeapi.co/api/v2/"
-    val getClient: PokemonApiInterface
+    val getClient: PokemonRetrofitApiInterface
         get() {
 
             val gson = GsonBuilder()
@@ -24,7 +24,7 @@ object PokemonRetrofitAPI {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
 
-            return retrofit.create(PokemonApiInterface::class.java)
+            return retrofit.create(PokemonRetrofitApiInterface::class.java)
 
         }
 }

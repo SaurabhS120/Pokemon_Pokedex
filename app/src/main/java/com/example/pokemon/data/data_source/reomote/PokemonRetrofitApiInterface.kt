@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface PokemonApiInterface {
+interface PokemonRetrofitApiInterface {
     companion object{
         val PAGE_SIZE = PokemonPageConfig.PAGE_SIZE
     }
