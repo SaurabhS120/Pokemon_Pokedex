@@ -1,4 +1,4 @@
-package com.example.pokemon.data.data_source
+package com.example.pokemon.data.data_source.mediator
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -6,25 +6,26 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
-import androidx.room.withTransaction
-import com.example.pokemon.data.data_source.local.PokemonDatabase
+import com.example.pokemon.data.data_source.local.PokemonLocalRepo
+import com.example.pokemon.data.data_source.reomote.PokemonRemoteRepo
 import com.example.pokemon.domain.converter.PngToBase64
 import com.example.pokemon.domain.entities.PokemonEntity
 import com.example.pokemon.domain.repos.PokemonDetailsRepo
-import com.example.pokemon.domain.repos.PokemonRemoteRepo
-import kotlinx.coroutines.*
+import com.example.pokemon.domain.repos.PokemonListRemoteRepo
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.URL
 
 @OptIn(ExperimentalPagingApi::class)
 class PokemonRemoteMediator(
-    private val database: PokemonDatabase,
-    private val networkService: PokemonRemoteRepo,
-    private val pokemonDetailsRepo: PokemonDetailsRepo,
+    private val localRepo: PokemonLocalRepo,
+    private val remoteRepo: PokemonRemoteRepo,
     private val viewModelScope: CoroutineScope,
 ) : RemoteMediator<Int, PokemonEntity>() {
-    val pokemonDao = database.pokemonDao()
 
     override suspend fun load(
         loadType: LoadType,
@@ -68,11 +69,11 @@ class PokemonRemoteMediator(
             // wrapped in a withContext(Dispatcher.IO) { ... } block since
             // Retrofit's Coroutine CallAdapter dispatches on a worker
             // thread.
-            val response = networkService.getPokemonList(((loadKey?:0)+1)/state.config.pageSize)
+            val response = remoteRepo.getPokemonList(((loadKey?:0)+1)/state.config.pageSize)
 
-            database.withTransaction {
+            localRepo.withTransaction {
                 if (loadType == LoadType.REFRESH) {
-                    pokemonDao.clearAll()
+                    localRepo.clearAll()
                 }
 
                 // Insert new users into database, which invalidates the
@@ -84,18 +85,18 @@ class PokemonRemoteMediator(
                         if (base64Image==null||base64Image==""){
                             val urlParts = it?.url?.split('/')
                             val pokemonId = urlParts?.get(urlParts.lastIndex-1)?.toInt()?:1
-                            val pokemonDetails = pokemonDetailsRepo.getPokemonDetails(pokemonId)
+                            val pokemonDetails = remoteRepo.getPokemonDetails(pokemonId)
                             val pokemonImageUrl = pokemonDetails.sprites!!.other!!.home!!.front_default!!
                             val bm = BitmapFactory.decodeStream(URL(pokemonImageUrl).openStream())
-                            val smallBitmap = Bitmap.createScaledBitmap(bm,200,200,true)
+                            val smallBitmap = Bitmap.createScaledBitmap(bm, 200, 200, true)
                             base64Image = PngToBase64.convert(smallBitmap)
-                            it?.id?.let { database.pokemonDao().updateImage(it,base64Image) }
+                            it?.id?.let { localRepo.updateImage(it,base64Image) }
                         }
                         it.imageBase64 = base64Image
                     }
                 }.awaitAll()
                 response.results!!.let {
-                    pokemonDao.insertAll(it)
+                    localRepo.insertAll(it)
                 }
             }
 

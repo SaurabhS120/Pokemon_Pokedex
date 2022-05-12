@@ -1,4 +1,4 @@
-package com.example.pokemon.data.data_source.local
+package com.example.pokemon.data.data_source.local.room
 
 import android.content.Context
 import androidx.room.Room
@@ -9,13 +9,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-@Module
-@InstallIn(SingletonComponent::class)
 object PokemonDatabaseProvider {
-
-    @Singleton
-    @Provides
-    fun getDatabase(@ApplicationContext applicationContext:Context): PokemonDatabase {
+    fun getDatabase(applicationContext:Context): PokemonDatabase {
         return Room.databaseBuilder(
             applicationContext,
             PokemonDatabase::class.java,

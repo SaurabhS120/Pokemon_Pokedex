@@ -5,9 +5,9 @@ import androidx.paging.PagingState
 import com.example.pokemon.domain.converter.PokemonPageUrlToNoConverter
 import com.example.pokemon.domain.converter.PokemonResponseToUseCaseListConverter
 import com.example.pokemon.domain.entities.PokemonEntity
-import com.example.pokemon.domain.repos.PokemonRemoteRepo
+import com.example.pokemon.domain.repos.PokemonListRemoteRepo
 
-class PokemonPagingSource(val pokemonRemoteRepo: PokemonRemoteRepo) : PagingSource<Int, PokemonEntity>() {
+class PokemonPagingSource(val pokemonRemoteRepo: PokemonListRemoteRepo) : PagingSource<Int, PokemonEntity>() {
     var nextPageNumber:Int? = 0
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PokemonEntity> {
         try {

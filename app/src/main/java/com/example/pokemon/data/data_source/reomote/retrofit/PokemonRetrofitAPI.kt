@@ -1,4 +1,4 @@
-package com.example.pokemon.data.data_source.reomote
+package com.example.pokemon.data.data_source.reomote.retrofit
 
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
