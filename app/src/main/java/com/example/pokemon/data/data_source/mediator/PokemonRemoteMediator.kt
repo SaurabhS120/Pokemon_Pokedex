@@ -6,12 +6,10 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
-import com.example.pokemon.data.data_source.local.PokemonLocalRepo
-import com.example.pokemon.data.data_source.reomote.PokemonRemoteRepo
+import com.example.pokemon.domain.repos.PokemonListLocalRepo
+import com.example.pokemon.domain.repos.PokemonRemoteRepo
 import com.example.pokemon.domain.converter.PngToBase64
 import com.example.pokemon.domain.entities.PokemonEntity
-import com.example.pokemon.domain.repos.PokemonDetailsRepo
-import com.example.pokemon.domain.repos.PokemonListRemoteRepo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -22,7 +20,7 @@ import java.net.URL
 
 @OptIn(ExperimentalPagingApi::class)
 class PokemonRemoteMediator(
-    private val localRepo: PokemonLocalRepo,
+    private val localRepo: PokemonListLocalRepo,
     private val remoteRepo: PokemonRemoteRepo,
     private val viewModelScope: CoroutineScope,
 ) : RemoteMediator<Int, PokemonEntity>() {

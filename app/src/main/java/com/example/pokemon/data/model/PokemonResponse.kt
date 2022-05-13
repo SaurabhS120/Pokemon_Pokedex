@@ -1,7 +1,7 @@
 package com.example.pokemon.data.model
 
 import android.net.Uri
-import com.example.pokemon.data.repoImpl.PokemonPageConfig
+import com.example.pokemon.data.config.PokemonPageConfig
 import com.example.pokemon.domain.usecases.PokemonUseCase
 
 data class PokemonResponse(

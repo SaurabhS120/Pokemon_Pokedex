@@ -1,22 +1,22 @@
-package com.example.pokemon.domain.repoImpl
+package com.example.pokemon.data.repoImpl.paging.mediator
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.liveData
 import com.example.pokemon.data.data_source.mediator.PokemonRemoteMediator
-import com.example.pokemon.data.data_source.local.PokemonLocalRepo
-import com.example.pokemon.data.data_source.reomote.PokemonRemoteRepo
-import com.example.pokemon.data.repoImpl.PokemonPageConfig
-import com.example.pokemon.domain.repos.PokemonPagingRepo
+import com.example.pokemon.domain.repos.PokemonListLocalRepo
+import com.example.pokemon.domain.repos.PokemonRemoteRepo
+import com.example.pokemon.data.config.PokemonPageConfig
+import com.example.pokemon.domain.repos.PokemonListPagingRepo
 import kotlinx.coroutines.CoroutineScope
 
 @OptIn(ExperimentalPagingApi::class)
-class PokemonPagingRepoImpl(
-    val localRepo: PokemonLocalRepo,
+class PokemonListPagingRepoImpl(
+    val localRepo: PokemonListLocalRepo,
     val remoteRepo : PokemonRemoteRepo,
     val viewModelScope: CoroutineScope
-) : PokemonPagingRepo {
+) : PokemonListPagingRepo {
 //    val pokemonApi:PokemonApiInterface = PokemonRetrofitAPI.getClient
 //    val pokemonRepo: PokemonRepo = PokemonRepoImpl(pokemonApi)
 //    override fun getPokemons() = Pager(
