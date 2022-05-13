@@ -14,7 +14,7 @@ import javax.inject.Inject
 @Module
 @InstallIn(SingletonComponent::class)
 class PokemonRoomDatabaseRepo @Inject constructor(@ApplicationContext applicationContext:Context) : PokemonLocalRepo {
-    val pokemonDatabase = PokemonDatabaseProvider.getDatabase(applicationContext)
+    val pokemonDatabase = PokemonRoomDatabaseProvider.getDatabase(applicationContext)
     val pokemonDao = pokemonDatabase.pokemonDao()
     override suspend fun insertAll(pokemons: List<PokemonEntity>) = pokemonDao.insertAll(pokemons)
 
