@@ -61,6 +61,7 @@
                 app:tint="@color/white"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
+            android:id="@+id/pokemonName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -71,12 +72,13 @@
             android:layout_marginStart="20sp"
             android:layout_marginEnd="20sp"/>
         <ImageView
+            android:id="@+id/pokemonImage"
             android:layout_width="match_parent"
             android:layout_height="200sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="100sp"
-            android:src="@drawable/pokemon_test_img"
+            android:src="@drawable/pokeball"
             android:elevation="2sp"/>
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
