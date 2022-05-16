@@ -24,6 +24,9 @@ class PokemonDetailsActivity : AppCompatActivity() {
         setContentView(pokemonDetailsBinding.root)
         val pokemonEntity : PokemonEntityParcel? = intent.getParcelableExtra<PokemonEntityParcel>(POKEMON_DETAILS_KEY)
         supportActionBar?.hide()
+        pokemonDetailsBinding.backButton.setOnClickListener {
+            finish()
+        }
         pokemonDetailsViewModel.pokemonName.observe(this){
             if (it!=null && it!=""){
                 pokemonDetailsBinding.pokemonName.setText(it.replaceFirstChar {
