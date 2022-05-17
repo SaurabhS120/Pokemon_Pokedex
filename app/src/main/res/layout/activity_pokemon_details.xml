@@ -79,22 +79,69 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="100sp"
             android:src="@drawable/pokeball"
-            android:elevation="2sp"/>
+            android:elevation="10sp"/>
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="3000sp"
-            app:cardCornerRadius="50sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
             android:layout_marginTop="250sp"
-            app:cardElevation="1sp"
-            android:layout_marginLeft="10sp"
-            android:layout_marginRight="10sp">
+            android:layout_marginBottom="20sp"
+            app:cardCornerRadius="50sp"
+            app:cardElevation="5sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50sp">
+                android:layout_marginTop="50sp"
+                android:minHeight="300sp">
 
+                <HorizontalScrollView
+                    android:id="@+id/tabs_scroll_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tabs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:tabMinWidth="150sp">
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/about" />
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/base_stats" />
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/evolution" />
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/moves" />
+                    </com.google.android.material.tabs.TabLayout>
+                </HorizontalScrollView>
+
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/detailFragmentContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="2dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tabs_scroll_view" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>

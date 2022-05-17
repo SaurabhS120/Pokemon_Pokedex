@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.ui.detailsFragments.PokemonDetailsAboutFragment"
+    android:orientation="vertical">
+
+    <TableRow android:padding="10sp">
+        <TextView android:text="@string/species" android:layout_weight="1" android:textAlignment="center"/>
+        <TextView android:id="@+id/speciesTextView" android:layout_weight="1" android:textAlignment="center"/>
+    </TableRow>
+
+    <TableRow android:padding="10sp">
+        <TextView android:text="@string/height" android:layout_weight="1" android:textAlignment="center"/>
+        <TextView android:id="@+id/heightTextView" android:layout_weight="1" android:textAlignment="center"/>
+    </TableRow>
+
+    <TableRow android:padding="10sp">
+        <TextView android:text="@string/weight" android:layout_weight="1" android:textAlignment="center"/>
+        <TextView android:id="@+id/weightTextView" android:layout_weight="1" android:textAlignment="center"/>
+    </TableRow>
+
+    <TableRow android:padding="10sp">
+        <TextView android:text="@string/abilities" android:layout_weight="1" android:textAlignment="center"/>
+        <TextView android:id="@+id/abilitiesTextView" android:layout_weight="1" android:textAlignment="center"/>
+    </TableRow>
+
+</TableLayout>

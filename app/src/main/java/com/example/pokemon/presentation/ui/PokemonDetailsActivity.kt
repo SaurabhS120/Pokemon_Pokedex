@@ -41,6 +41,12 @@ class PokemonDetailsActivity : AppCompatActivity() {
                 Glide.with(this).load(it).into(pokemonDetailsBinding.pokemonImage)
             }
         }
+        pokemonDetailsViewModel.pokemonDetailFragment.observe(this){ fragment ->
+            supportFragmentManager.beginTransaction().apply {
+                replace(pokemonDetailsBinding.detailFragmentContainer.id,fragment)
+                commit()
+            }
+        }
         pokemonDetailsViewModel.loadDetails(pokemonEntity)
     }
 }
