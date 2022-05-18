@@ -8,7 +8,9 @@ import com.example.pokemon.R
 import com.example.pokemon.databinding.ActivityPokemonDetailsBinding
 import com.example.pokemon.domain.entities.PokemonEntity
 import com.example.pokemon.domain.entities.PokemonEntityParcel
+import com.example.pokemon.presentation.ui.detailsFragments.PokemonDetailsAboutFragment
 import com.example.pokemon.presentation.viewmodels.PokemonDetailsViewModel
+import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -27,26 +29,37 @@ class PokemonDetailsActivity : AppCompatActivity() {
         pokemonDetailsBinding.backButton.setOnClickListener {
             finish()
         }
-        pokemonDetailsViewModel.pokemonName.observe(this){
-            if (it!=null && it!=""){
-                pokemonDetailsBinding.pokemonName.setText(it.replaceFirstChar {
-                    if (it.isLowerCase()) it.titlecase(
-                        Locale.getDefault()
-                    ) else it.toString()
-                })
+        pokemonDetailsBinding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                pokemonDetailsViewModel.gotoTab(tab?.position?:0)
             }
-        }
-        pokemonDetailsViewModel.pokemonImagePath.observe(this){
-            if (it!=null && it!=""){
-                Glide.with(this).load(it).into(pokemonDetailsBinding.pokemonImage)
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+        })
+        pokemonDetailsViewModel.apply {
+            pokemonName.observe(this@PokemonDetailsActivity) {
+                if (it != null && it != "") {
+                    pokemonDetailsBinding.pokemonName.setText(it.replaceFirstChar {
+                        if (it.isLowerCase()) it.titlecase(
+                            Locale.getDefault()
+                        ) else it.toString()
+                    })
+                }
             }
-        }
-        pokemonDetailsViewModel.pokemonDetailFragment.observe(this){ fragment ->
-            supportFragmentManager.beginTransaction().apply {
-                replace(pokemonDetailsBinding.detailFragmentContainer.id,fragment)
-                commit()
+            pokemonImagePath.observe(this@PokemonDetailsActivity) {
+                if (it != null && it != "") {
+                    Glide.with(this@PokemonDetailsActivity).load(it).into(pokemonDetailsBinding.pokemonImage)
+                }
             }
+            pokemonDetailFragment.observe(this@PokemonDetailsActivity) { fragment ->
+                supportFragmentManager.beginTransaction().apply {
+                    replace(pokemonDetailsBinding.detailFragmentContainer.id, fragment)
+                    commit()
+                }
+            }
+            loadDetails(pokemonEntity)
         }
-        pokemonDetailsViewModel.loadDetails(pokemonEntity)
     }
 }

@@ -1,5 +1,7 @@
 package com.example.pokemon.data.model
 
+import com.google.gson.annotations.SerializedName
+
 data class PokemonDetailsResponse(
 	val locationAreaEncounters: String? = null,
 	val types: List<TypesItem?>? = null,
@@ -73,6 +75,7 @@ data class FormsItem(
 
 data class StatsItem(
 	val stat: Stat? = null,
+	@SerializedName("base_stat")
 	val baseStat: Int? = null,
 	val effort: Int? = null
 )

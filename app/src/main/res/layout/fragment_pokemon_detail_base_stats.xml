@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.ui.detailsFragments.PokemonDetailBaseStatsFragment">
+
+    <TableRow>
+        <TextView android:textAlignment="center" android:text="@string/hp" android:layout_margin="10sp" android:layout_width="150sp"/>
+        <TextView android:textAlignment="center" android:id="@+id/hpTextView" android:text="00" android:layout_margin="10sp"/>
+    </TableRow>
+
+    <TableRow>
+        <TextView android:textAlignment="center" android:text="@string/attack" android:layout_margin="10sp" android:layout_width="150sp"/>
+        <TextView android:textAlignment="center" android:id="@+id/attackTextView" android:text="00" android:layout_margin="10sp"/>
+    </TableRow>
+
+    <TableRow>
+        <TextView android:textAlignment="center" android:text="@string/defence" android:layout_margin="10sp" android:layout_width="150sp"/>
+        <TextView android:textAlignment="center" android:id="@+id/defenceTextView" android:text="00" android:layout_margin="10sp"/>
+    </TableRow>
+
+    <TableRow>
+        <TextView android:textAlignment="center" android:text="@string/sp_attack" android:layout_margin="10sp" android:layout_width="150sp"/>
+        <TextView android:textAlignment="center" android:id="@+id/spAttackTextView" android:text="00" android:layout_margin="10sp"/>
+    </TableRow>
+
+    <TableRow>
+        <TextView android:textAlignment="center" android:text="@string/sp_defence" android:layout_margin="10sp" android:layout_width="150sp"/>
+        <TextView android:textAlignment="center" android:id="@+id/spDefenceTextView" android:text="00" android:layout_margin="10sp"/>
+    </TableRow>
+
+    <TableRow>
+        <TextView android:textAlignment="center" android:text="@string/speed" android:layout_margin="10sp" android:layout_width="150sp"/>
+        <TextView android:textAlignment="center" android:id="@+id/speedTextView" android:text="00" android:layout_margin="10sp"/>
+    </TableRow>
+
+    <TableRow>
+        <TextView android:textAlignment="center" android:text="@string/total" android:layout_margin="10sp" android:layout_width="150sp"/>
+        <TextView android:textAlignment="center" android:id="@+id/totalTextView" android:text="00" android:layout_margin="10sp"/>
+    </TableRow>
+
+
+</TableLayout>

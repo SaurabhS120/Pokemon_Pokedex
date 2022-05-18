@@ -5,30 +5,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
-import com.example.pokemon.R
 import com.example.pokemon.databinding.FragmentPokemonDetailsAboutBinding
-import com.example.pokemon.presentation.viewmodels.PokemonDetailsViewModel
-import dagger.hilt.EntryPoint
+import com.example.pokemon.presentation.ui.detailsFragments.PokemonDetailFragment.ArgumentHelper
+import com.example.pokemon.presentation.ui.detailsFragments.PokemonDetailsAboutFragment.ArgumentHelperImpl.PokemonAbout
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PokemonDetailsAboutFragment : Fragment(),PokemonDetailFragment {
-    companion object ArgumentHelper{
+class PokemonDetailsAboutFragment : Fragment(),PokemonDetailFragment<PokemonAbout> {
+    companion object ArgumentHelperImpl: ArgumentHelper<PokemonAbout>{
         val SPECIES = "species"
         val HEIGHT = "height"
         val WEIGHT = "weight"
         val ABILITIES = "abilities"
-        fun createBundle(species:String,height:String,weight:String,abilities:String):Bundle{
-            val bundle = Bundle()
-            bundle.putString(SPECIES,species)
-            bundle.putString(HEIGHT,height)
-            bundle.putString(WEIGHT,weight)
-            bundle.putString(ABILITIES,abilities)
-            return bundle
+        data class PokemonAbout(val species:String, val height:String,val weight:String,val abilities:String)
+        override fun createBundle(about:PokemonAbout)=Bundle().apply{
+            putString(SPECIES,about.species)
+            putString(HEIGHT,about.height)
+            putString(WEIGHT,about.weight)
+            putString(ABILITIES,about.abilities)
         }
     }
     private lateinit var pokemonDetailsAboutFragmentBinding : FragmentPokemonDetailsAboutBinding
+    override fun argumentHelper(): ArgumentHelper<PokemonAbout>  = ArgumentHelperImpl
     fun getSpecies() = arguments?.getString(SPECIES)?:""
     fun getHeight() = arguments?.getString(HEIGHT)?:""
     fun getWeight() = arguments?.getString(WEIGHT)?:""
@@ -40,11 +38,14 @@ class PokemonDetailsAboutFragment : Fragment(),PokemonDetailFragment {
     ): View? {
         // Inflate the layout for this fragment
         pokemonDetailsAboutFragmentBinding = FragmentPokemonDetailsAboutBinding.inflate(layoutInflater)
-        pokemonDetailsAboutFragmentBinding.speciesTextView.setText(getSpecies())
-        pokemonDetailsAboutFragmentBinding.weightTextView.setText(getWeight())
-        pokemonDetailsAboutFragmentBinding.heightTextView.setText(getHeight())
-        pokemonDetailsAboutFragmentBinding.abilitiesTextView.setText(getAbilities())
+        pokemonDetailsAboutFragmentBinding.apply {
+            speciesTextView.setText(getSpecies())
+            weightTextView.setText(getWeight())
+            heightTextView.setText(getHeight())
+            abilitiesTextView.setText(getAbilities())
+        }
         return pokemonDetailsAboutFragmentBinding.root
     }
+
 
 }
