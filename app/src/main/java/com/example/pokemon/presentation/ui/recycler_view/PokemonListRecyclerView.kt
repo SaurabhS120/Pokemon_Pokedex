@@ -3,21 +3,21 @@ package com.example.pokemon.presentation.ui.recycler_view
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokemon.domain.entities.PokemonEntity
-import com.example.pokemon.presentation.ui.PokemonListActivity
+import com.example.pokemon.presentation.ui.PokemonListFragment
 
 class PokemonListRecyclerView(
     pokemonListRecyclerView: RecyclerView,
-    pokemonListActivity: PokemonListActivity
+    pokemonListFragment: PokemonListFragment
 ) {
 
-    val pokemonListViewModel = pokemonListActivity.pokemonListViewModel
+    val pokemonListViewModel = pokemonListFragment.pokemonListViewModel
     val adapter = pokemonListViewModel.pokemonListRecyclerAdapter
     init {
-        pokemonListRecyclerView.layoutManager = GridLayoutManager(pokemonListActivity, 2)
+        pokemonListRecyclerView.layoutManager = GridLayoutManager(pokemonListFragment.context, 2)
         pokemonListRecyclerView.adapter = adapter
-        pokemonListViewModel.pokemonList.observe(pokemonListActivity) {
+        pokemonListViewModel.pokemonList.observe(pokemonListFragment) {
             adapter.submitData(
-                pokemonListActivity.lifecycle,
+                pokemonListFragment.lifecycle,
                 it
             )
         }

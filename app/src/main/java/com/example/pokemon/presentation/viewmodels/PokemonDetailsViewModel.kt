@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.pokemon.data.model.PokemonDetailsResponse
 import com.example.pokemon.domain.entities.PokemonEntity
 import com.example.pokemon.domain.repos.PokemonRemoteRepo
-import com.example.pokemon.presentation.ui.PokemonDetailsActivity
 import com.example.pokemon.presentation.ui.detailsFragments.PokemonDetailBaseStatsFragment
 import com.example.pokemon.presentation.ui.detailsFragments.PokemonDetailBaseStatsFragment.ArgumentHelperImpl.PokemonStats
 import com.example.pokemon.presentation.ui.detailsFragments.PokemonDetailsAboutFragment
