@@ -37,10 +37,10 @@ class PokemonDetailsFragment : Fragment() {
                 val tabName = tab?.text.toString()?:""
                 when(tabName){
                     getString(R.string.about) -> {
-                        pokemonDetailsBinding.detailFragmentContainer.findNavController().navigate(R.id.pokemonDetailsAboutFragment)
+                        pokemonDetailsBinding.detailFragmentContainer.findNavController().navigate(R.id.pokemonDetailsAboutAction)
                     }
                     getString(R.string.base_stats) -> {
-                        pokemonDetailsBinding.detailFragmentContainer.findNavController().navigate(R.id.pokemonDetailBaseStatsFragment)
+                        pokemonDetailsBinding.detailFragmentContainer.findNavController().navigate(R.id.pokemonDetailBaseStatsAction)
                     }
 
                 }
