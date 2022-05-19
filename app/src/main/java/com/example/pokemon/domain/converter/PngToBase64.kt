@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import android.util.Base64
 import java.io.ByteArrayOutputStream
 
-object PngToBase64:Converter<Bitmap,String> {
+object PngToBase64 : Converter<Bitmap, String> {
     override fun convert(obj: Bitmap): String {
         val baos = ByteArrayOutputStream()
         obj.compress(Bitmap.CompressFormat.PNG, 100, baos) // bm is the bitmap object

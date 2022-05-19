@@ -12,6 +12,7 @@ class PokemonListRecyclerView(
 
     val pokemonListViewModel = pokemonListFragment.pokemonListViewModel
     val adapter = pokemonListViewModel.pokemonListRecyclerAdapter
+
     init {
         pokemonListRecyclerView.layoutManager = GridLayoutManager(pokemonListFragment.context, 2)
         pokemonListRecyclerView.adapter = adapter
@@ -23,7 +24,8 @@ class PokemonListRecyclerView(
         }
 
     }
-    fun setOnclickListener(listener : (pokemonEntity: PokemonEntity?)->Unit){
+
+    fun setOnclickListener(listener: (pokemonEntity: PokemonEntity?) -> Unit) {
         adapter.setOnClickListener(listener)
     }
 }

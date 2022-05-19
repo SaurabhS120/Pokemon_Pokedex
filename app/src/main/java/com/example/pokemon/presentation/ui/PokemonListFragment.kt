@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PokemonListFragment : Fragment() {
-    val pokemonListViewModel : PokemonListViewModel by viewModels()
+    val pokemonListViewModel: PokemonListViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -30,9 +30,13 @@ class PokemonListFragment : Fragment() {
             pokemonListBinding.pokemonListRecyclerView,
             this
         )
-        pokemonListRecyclerView.setOnclickListener { pokemonEntity:PokemonEntity?->
-            val pokemonEntityParcel = PokemonEntityParcel(pokemonEntity?: PokemonEntity(-1,"","",""))
-            val action = PokemonListFragmentDirections.actionPokemonListFragmentToPokemonDetailsFragment(pokemonEntityParcel)
+        pokemonListRecyclerView.setOnclickListener { pokemonEntity: PokemonEntity? ->
+            val pokemonEntityParcel =
+                PokemonEntityParcel(pokemonEntity ?: PokemonEntity(-1, "", "", ""))
+            val action =
+                PokemonListFragmentDirections.actionPokemonListFragmentToPokemonDetailsFragment(
+                    pokemonEntityParcel
+                )
             activity?.findNavController(R.id.mainFragmentContainerView)?.navigate(action)
 //            val intent = Intent(this,PokemonDetailsFragment::class.java)
 //            val pokemonEntityParcel = pokemonEntity?.let {

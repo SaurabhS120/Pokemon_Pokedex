@@ -21,7 +21,7 @@ import java.util.*
 @AndroidEntryPoint
 class PokemonDetailsFragment : Fragment() {
     val args: PokemonDetailsFragmentArgs by navArgs()
-    val pokemonDetailsViewModel : PokemonDetailsViewModel by activityViewModels()
+    val pokemonDetailsViewModel: PokemonDetailsViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,15 +32,18 @@ class PokemonDetailsFragment : Fragment() {
         pokemonDetailsBinding.backButton.setOnClickListener {
             activity?.findNavController(R.id.mainFragmentContainerView)?.popBackStack()
         }
-        pokemonDetailsBinding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+        pokemonDetailsBinding.tabs.addOnTabSelectedListener(object :
+            TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                val tabName = tab?.text.toString()?:""
-                when(tabName){
+                val tabName = tab?.text.toString() ?: ""
+                when (tabName) {
                     getString(R.string.about) -> {
-                        pokemonDetailsBinding.detailFragmentContainer.findNavController().navigate(R.id.pokemonDetailsAboutAction)
+                        pokemonDetailsBinding.detailFragmentContainer.findNavController()
+                            .navigate(R.id.pokemonDetailsAboutAction)
                     }
                     getString(R.string.base_stats) -> {
-                        pokemonDetailsBinding.detailFragmentContainer.findNavController().navigate(R.id.pokemonDetailBaseStatsAction)
+                        pokemonDetailsBinding.detailFragmentContainer.findNavController()
+                            .navigate(R.id.pokemonDetailBaseStatsAction)
                     }
 
                 }
@@ -62,7 +65,8 @@ class PokemonDetailsFragment : Fragment() {
             }
             pokemonImagePath.observe(viewLifecycleOwner) {
                 if (it != null && it != "") {
-                    Glide.with(this@PokemonDetailsFragment).load(it).into(pokemonDetailsBinding.pokemonImage)
+                    Glide.with(this@PokemonDetailsFragment).load(it)
+                        .into(pokemonDetailsBinding.pokemonImage)
                 }
             }
             return pokemonDetailsBinding.root
@@ -72,7 +76,7 @@ class PokemonDetailsFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         pokemonDetailsViewModel.reset()
-        val pokemonEntity : PokemonEntityParcel? = args.pokemonEntityParcel
+        val pokemonEntity: PokemonEntityParcel? = args.pokemonEntityParcel
         pokemonDetailsViewModel.loadDetails(pokemonEntity)
     }
 }

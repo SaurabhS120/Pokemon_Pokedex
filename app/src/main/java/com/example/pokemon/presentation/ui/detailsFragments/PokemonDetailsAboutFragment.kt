@@ -12,15 +12,16 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PokemonDetailsAboutFragment : Fragment() {
-    private lateinit var pokemonDetailsAboutFragmentBinding : FragmentPokemonDetailsAboutBinding
-    val pokemonDetailsViewModel : PokemonDetailsViewModel by activityViewModels()
+    private lateinit var pokemonDetailsAboutFragmentBinding: FragmentPokemonDetailsAboutBinding
+    val pokemonDetailsViewModel: PokemonDetailsViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        pokemonDetailsAboutFragmentBinding = FragmentPokemonDetailsAboutBinding.inflate(layoutInflater)
-        pokemonDetailsViewModel.pokemonAbout.observe(viewLifecycleOwner){
+        pokemonDetailsAboutFragmentBinding =
+            FragmentPokemonDetailsAboutBinding.inflate(layoutInflater)
+        pokemonDetailsViewModel.pokemonAbout.observe(viewLifecycleOwner) {
             pokemonDetailsAboutFragmentBinding.apply {
                 speciesTextView.setText(it.species)
                 weightTextView.setText(it.weight)

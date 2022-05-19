@@ -14,6 +14,7 @@ import dagger.hilt.components.SingletonComponent
 interface RepoProvider {
     @Binds
     fun getLocalRepo(pokemonListLocalRepo: PokemonRoomDatabaseRepo): PokemonListLocalRepo
+
     @Binds
     fun getRemoteRepo(pokemonRemoteRepo: PokemonRetrofitRepo): PokemonRemoteRepo
 }

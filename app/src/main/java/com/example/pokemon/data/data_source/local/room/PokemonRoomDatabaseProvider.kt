@@ -4,11 +4,14 @@ import android.content.Context
 import androidx.room.Room
 
 object PokemonRoomDatabaseProvider {
-    fun getDatabase(applicationContext:Context): PokemonDatabase {
-        return Room.databaseBuilder(
+    private var database: PokemonDatabase? = null
+    fun getDatabase(applicationContext: Context): PokemonDatabase {
+        return database ?: Room.databaseBuilder(
             applicationContext,
             PokemonDatabase::class.java,
             "pokemon_database"
-        ).build()
+        ).build().apply {
+            database = this
+        }
     }
 }

@@ -8,12 +8,16 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface PokemonRetrofitApiInterface {
-    companion object{
+    companion object {
         val PAGE_SIZE = PokemonPageConfig.PAGE_SIZE
     }
+
     @GET("pokemon/")
-    suspend fun getPokemonList(@Query("offset")offset:Int,@Query("limit")limit:Int = PAGE_SIZE): PokemonResponse
+    suspend fun getPokemonList(
+        @Query("offset") offset: Int,
+        @Query("limit") limit: Int = PAGE_SIZE
+    ): PokemonResponse
 
     @GET("pokemon/{id}/")
-    suspend fun getPokemonDetails(@Path("id")id:Int) : PokemonDetailsResponse
+    suspend fun getPokemonDetails(@Path("id") id: Int): PokemonDetailsResponse
 }

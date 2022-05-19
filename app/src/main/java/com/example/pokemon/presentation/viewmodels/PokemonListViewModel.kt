@@ -15,7 +15,7 @@ class PokemonListViewModel @Inject constructor(
     localRepo: PokemonListLocalRepo,
     remoteRepo: PokemonRemoteRepo
 ) : ViewModel() {
-    val pokemonListPagingRepo = PokemonListPagingRepoImpl(localRepo,remoteRepo,viewModelScope)
+    val pokemonListPagingRepo = PokemonListPagingRepoImpl(localRepo, remoteRepo, viewModelScope)
     val pokemonList = pokemonListPagingRepo.getPokemons().cachedIn(viewModelScope)
     val pokemonListRecyclerAdapter = PokemonPagingAdapter()
 }

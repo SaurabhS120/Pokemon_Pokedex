@@ -17,14 +17,15 @@ import javax.inject.Inject
 class PokemonDetailsViewModel @Inject constructor(val remoteRepo: PokemonRemoteRepo) : ViewModel() {
     val pokemonName = MutableLiveData("Pokemon name")
     val pokemonImagePath = MutableLiveData("")
-    val pokemonAbout = MutableLiveData(PokemonAbout("","","",""))
-    val baseStats = MutableLiveData(PokemonStats("","","","","","",""))
-    fun reset(){
+    val pokemonAbout = MutableLiveData(PokemonAbout("", "", "", ""))
+    val baseStats = MutableLiveData(PokemonStats("", "", "", "", "", "", ""))
+    fun reset() {
         pokemonName.value = "Pokemon name"
         pokemonImagePath.value = ""
-        pokemonAbout.value = PokemonAbout("","","","")
-        baseStats.value = PokemonStats("","","","","","","")
+        pokemonAbout.value = PokemonAbout("", "", "", "")
+        baseStats.value = PokemonStats("", "", "", "", "", "", "")
     }
+
     var pokemonDetails: PokemonDetailsResponse? = null
         set(pokemonDetails: PokemonDetailsResponse?) {
             pokemonDetails?.let {

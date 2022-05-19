@@ -10,7 +10,7 @@ import com.example.pokemon.domain.entities.PokemonEntity
 @Dao
 interface PokemonDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(pokemons:List<PokemonEntity>)
+    suspend fun insertAll(pokemons: List<PokemonEntity>)
 
     @Query("SELECT * FROM pokemons")
     fun pagingSource(): PagingSource<Int, PokemonEntity>
@@ -19,5 +19,5 @@ interface PokemonDao {
     suspend fun clearAll()
 
     @Query("UPDATE pokemons SET imageBase64=:image where id=:id")
-    suspend fun updateImage(id:Int,image:String)
+    suspend fun updateImage(id: Int, image: String)
 }

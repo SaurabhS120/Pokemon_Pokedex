@@ -13,21 +13,24 @@ import java.util.*
 
 class PokemonPagingAdapter() :
     PagingDataAdapter<PokemonEntity, PokemonPagingAdapter.PokemonListViewHolder>(COMPARETOR) {
-    private var listener : ((pokemonEntity: PokemonEntity?)->Unit)?={}
-    fun setOnClickListener(listener : (pokemonEntity: PokemonEntity?)->Unit){
+    private var listener: ((pokemonEntity: PokemonEntity?) -> Unit)? = {}
+    fun setOnClickListener(listener: (pokemonEntity: PokemonEntity?) -> Unit) {
         this.listener = listener
     }
-    class PokemonListViewHolder(val pokemonSmallCardBinding: PokemonSmallCardBinding) : RecyclerView.ViewHolder(pokemonSmallCardBinding.root)
+
+    class PokemonListViewHolder(val pokemonSmallCardBinding: PokemonSmallCardBinding) :
+        RecyclerView.ViewHolder(pokemonSmallCardBinding.root)
+
     override fun onBindViewHolder(holder: PokemonListViewHolder, position: Int) {
         val item = getItem(position)
         holder.pokemonSmallCardBinding.pokemaonName.text = item?.name.toString()
             .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
         holder.pokemonSmallCardBinding.pokemonImage.setImageDrawable(null)
-        val base64Image=item?.imageBase64
+        val base64Image = item?.imageBase64
         val byteArray = base64Image?.let { Base64ToByteArray.convert(it) }
         holder.pokemonSmallCardBinding.root.setOnClickListener {
-            listener?.let {
-                    it1 -> it1(item)
+            listener?.let { it1 ->
+                it1(item)
             }
         }
         Glide
@@ -37,11 +40,13 @@ class PokemonPagingAdapter() :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonListViewHolder {
-        val pokemonSmallCardView = PokemonSmallCardBinding.inflate(LayoutInflater.from(parent.context))
+        val pokemonSmallCardView =
+            PokemonSmallCardBinding.inflate(LayoutInflater.from(parent.context))
         return PokemonListViewHolder(pokemonSmallCardView)
     }
-    companion object{
-        val COMPARETOR = object : DiffUtil.ItemCallback<PokemonEntity>(){
+
+    companion object {
+        val COMPARETOR = object : DiffUtil.ItemCallback<PokemonEntity>() {
             override fun areItemsTheSame(oldItem: PokemonEntity, newItem: PokemonEntity): Boolean {
                 return oldItem.name == newItem.name
             }

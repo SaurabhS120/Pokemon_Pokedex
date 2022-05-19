@@ -49,12 +49,11 @@ class PokemonRemoteMediator(
                     // valid for initial load. If lastItem is null it means no
                     // items were loaded after the initial REFRESH and there are
                     // no more items to load.
-                    if (state.anchorPosition?:0>1 && lastItem==null) {
+                    if (state.anchorPosition ?: 0 > 1 && lastItem == null) {
                         return MediatorResult.Success(
                             endOfPaginationReached = true
                         )
-                    }
-                    else if(lastItem==null){
+                    } else if (lastItem == null) {
                         return MediatorResult.Success(
                             endOfPaginationReached = false
                         )
@@ -67,7 +66,7 @@ class PokemonRemoteMediator(
             // wrapped in a withContext(Dispatcher.IO) { ... } block since
             // Retrofit's Coroutine CallAdapter dispatches on a worker
             // thread.
-            val response = remoteRepo.getPokemonList(((loadKey?:0)+1)/state.config.pageSize)
+            val response = remoteRepo.getPokemonList(((loadKey ?: 0) + 1) / state.config.pageSize)
 
             localRepo.withTransaction {
                 if (loadType == LoadType.REFRESH) {
@@ -80,15 +79,16 @@ class PokemonRemoteMediator(
                 response.results!!.map {
                     viewModelScope.async(Dispatchers.IO) {
                         var base64Image = it.imageBase64
-                        if (base64Image==null||base64Image==""){
+                        if (base64Image == null || base64Image == "") {
                             val urlParts = it?.url?.split('/')
-                            val pokemonId = urlParts?.get(urlParts.lastIndex-1)?.toInt()?:1
+                            val pokemonId = urlParts?.get(urlParts.lastIndex - 1)?.toInt() ?: 1
                             val pokemonDetails = remoteRepo.getPokemonDetails(pokemonId)
-                            val pokemonImageUrl = pokemonDetails.sprites!!.other!!.home!!.front_default!!
+                            val pokemonImageUrl =
+                                pokemonDetails.sprites!!.other!!.home!!.front_default!!
                             val bm = BitmapFactory.decodeStream(URL(pokemonImageUrl).openStream())
                             val smallBitmap = Bitmap.createScaledBitmap(bm, 200, 200, true)
                             base64Image = PngToBase64.convert(smallBitmap)
-                            it?.id?.let { localRepo.updateImage(it,base64Image) }
+                            it?.id?.let { localRepo.updateImage(it, base64Image) }
                         }
                         it.imageBase64 = base64Image
                     }

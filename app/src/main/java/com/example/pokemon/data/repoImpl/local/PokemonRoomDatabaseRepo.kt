@@ -14,18 +14,17 @@ import javax.inject.Inject
 
 @Module
 @InstallIn(SingletonComponent::class)
-class PokemonRoomDatabaseRepo @Inject constructor(@ApplicationContext applicationContext:Context) :
+class PokemonRoomDatabaseRepo @Inject constructor(@ApplicationContext applicationContext: Context) :
     PokemonListLocalRepo {
-    val pokemonDatabase = PokemonRoomDatabaseProvider.getDatabase(applicationContext)
-    val pokemonDao = pokemonDatabase.pokemonDao()
+
+    private val pokemonDatabase = PokemonRoomDatabaseProvider.getDatabase(applicationContext)
+    private val pokemonDao = pokemonDatabase.pokemonDao()
+
     override suspend fun insertAll(pokemons: List<PokemonEntity>) = pokemonDao.insertAll(pokemons)
-
     override fun pagingSource(): PagingSource<Int, PokemonEntity> = pokemonDao.pagingSource()
-
     override suspend fun clearAll() = pokemonDao.clearAll()
-
-    override suspend fun updateImage(id: Int, image: String) = pokemonDao.updateImage(id,image)
-    override suspend fun withTransaction(task:suspend () -> Unit) {
+    override suspend fun updateImage(id: Int, image: String) = pokemonDao.updateImage(id, image)
+    override suspend fun withTransaction(task: suspend () -> Unit) {
         pokemonDatabase.withTransaction {
             task()
         }

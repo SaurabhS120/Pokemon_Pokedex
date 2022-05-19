@@ -9,15 +9,15 @@ import androidx.fragment.app.activityViewModels
 import com.example.pokemon.databinding.FragmentPokemonDetailBaseStatsBinding
 import com.example.pokemon.presentation.viewmodels.PokemonDetailsViewModel
 
-class PokemonDetailBaseStatsFragment : Fragment(){
+class PokemonDetailBaseStatsFragment : Fragment() {
     lateinit var baseStatsBinding: FragmentPokemonDetailBaseStatsBinding
-    val pokemonDetailsViewModel : PokemonDetailsViewModel by activityViewModels()
+    val pokemonDetailsViewModel: PokemonDetailsViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         baseStatsBinding = FragmentPokemonDetailBaseStatsBinding.inflate(layoutInflater)
-        pokemonDetailsViewModel.baseStats.observe(viewLifecycleOwner){
+        pokemonDetailsViewModel.baseStats.observe(viewLifecycleOwner) {
             baseStatsBinding.apply {
                 hpTextView.text = it.hp
                 hpPreogress.progress = it.hp.toInt()
@@ -32,7 +32,7 @@ class PokemonDetailBaseStatsFragment : Fragment(){
                 speedTextView.text = it.speed
                 speedProgress.progress = it.speed.toInt()
                 totalTextView.text = it.total
-                if (it.total.length>0)totalProgress.progress = it.total.toInt()
+                if (it.total.length > 0) totalProgress.progress = it.total.toInt()
             }
         }
         return baseStatsBinding.root
