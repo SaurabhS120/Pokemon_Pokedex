@@ -3,41 +3,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.detailsFragments.PokemonDetailBaseStatsFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.ui.detailsFragments.PokemonDetailBaseStatsFragment"
+    android:padding="20sp">
 
     <TableRow>
         <TextView android:textAlignment="center" android:text="@string/hp" android:layout_margin="10sp" android:layout_width="150sp"/>
         <TextView android:textAlignment="center" android:id="@+id/hpTextView" android:text="00" android:layout_margin="10sp"/>
+        <com.example.pokemon.presentation.CustomProgressBar android:id="@+id/hpPreogress" android:layout_height="20sp" android:layout_weight="1"  android:layout_width="100sp" android:layout_margin="10sp"/>
     </TableRow>
 
     <TableRow>
         <TextView android:textAlignment="center" android:text="@string/attack" android:layout_margin="10sp" android:layout_width="150sp"/>
         <TextView android:textAlignment="center" android:id="@+id/attackTextView" android:text="00" android:layout_margin="10sp"/>
+        <com.example.pokemon.presentation.CustomProgressBar android:id="@+id/attackProgress" android:layout_height="20sp" android:layout_weight="1"  android:layout_width="100sp" android:layout_margin="10sp"/>
     </TableRow>
 
     <TableRow>
         <TextView android:textAlignment="center" android:text="@string/defence" android:layout_margin="10sp" android:layout_width="150sp"/>
         <TextView android:textAlignment="center" android:id="@+id/defenceTextView" android:text="00" android:layout_margin="10sp"/>
+        <com.example.pokemon.presentation.CustomProgressBar android:id="@+id/defenceProgress" android:layout_height="20sp" android:layout_weight="1"  android:layout_width="100sp" android:layout_margin="10sp"/>
     </TableRow>
 
     <TableRow>
         <TextView android:textAlignment="center" android:text="@string/sp_attack" android:layout_margin="10sp" android:layout_width="150sp"/>
         <TextView android:textAlignment="center" android:id="@+id/spAttackTextView" android:text="00" android:layout_margin="10sp"/>
+        <com.example.pokemon.presentation.CustomProgressBar android:id="@+id/spAttackProgress" android:layout_height="20sp" android:layout_weight="1"  android:layout_width="100sp" android:layout_margin="10sp"/>
     </TableRow>
 
     <TableRow>
         <TextView android:textAlignment="center" android:text="@string/sp_defence" android:layout_margin="10sp" android:layout_width="150sp"/>
         <TextView android:textAlignment="center" android:id="@+id/spDefenceTextView" android:text="00" android:layout_margin="10sp"/>
+        <com.example.pokemon.presentation.CustomProgressBar android:id="@+id/spDefenceProgress" android:layout_height="20sp" android:layout_weight="1"  android:layout_width="100sp" android:layout_margin="10sp"/>
     </TableRow>
 
     <TableRow>
         <TextView android:textAlignment="center" android:text="@string/speed" android:layout_margin="10sp" android:layout_width="150sp"/>
         <TextView android:textAlignment="center" android:id="@+id/speedTextView" android:text="00" android:layout_margin="10sp"/>
+        <com.example.pokemon.presentation.CustomProgressBar android:id="@+id/speedProgress" android:layout_height="20sp" android:layout_weight="1"  android:layout_width="100sp" android:layout_margin="10sp"/>
     </TableRow>
 
     <TableRow>
         <TextView android:textAlignment="center" android:text="@string/total" android:layout_margin="10sp" android:layout_width="150sp"/>
         <TextView android:textAlignment="center" android:id="@+id/totalTextView" android:text="00" android:layout_margin="10sp"/>
+        <com.example.pokemon.presentation.CustomProgressBar android:id="@+id/totalProgress" android:layout_height="20sp" android:layout_weight="1"  android:layout_width="100sp" android:layout_margin="10sp"/>
     </TableRow>
 
 
