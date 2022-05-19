@@ -1,9 +1,6 @@
 package com.example.pokemon.domain.repos
 
 import androidx.paging.PagingSource
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
 import com.example.pokemon.domain.entities.PokemonEntity
 
 interface PokemonListLocalRepo {

@@ -1,8 +1,7 @@
 package com.example.pokemon.presentation.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.fragment.NavHostFragment
+import androidx.appcompat.app.AppCompatActivity
 import com.example.pokemon.R
 import dagger.hilt.android.AndroidEntryPoint
 

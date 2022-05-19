@@ -128,26 +128,19 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/base_stats" />
 
-                            <com.google.android.material.tabs.TabItem
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/evolution" />
-
-                            <com.google.android.material.tabs.TabItem
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/moves" />
                         </com.google.android.material.tabs.TabLayout>
                     </HorizontalScrollView>
 
                     <androidx.fragment.app.FragmentContainerView
                         android:id="@+id/detailFragmentContainer"
+                        android:name="androidx.navigation.fragment.NavHostFragment"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_marginBottom="2dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tabs_scroll_view" />
+                        app:layout_constraintTop_toBottomOf="@id/tabs_scroll_view"
+                        app:navGraph="@navigation/details_tab_navigation" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>

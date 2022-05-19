@@ -6,10 +6,10 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
-import com.example.pokemon.domain.repos.PokemonListLocalRepo
-import com.example.pokemon.domain.repos.PokemonRemoteRepo
 import com.example.pokemon.domain.converter.PngToBase64
 import com.example.pokemon.domain.entities.PokemonEntity
+import com.example.pokemon.domain.repos.PokemonListLocalRepo
+import com.example.pokemon.domain.repos.PokemonRemoteRepo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async

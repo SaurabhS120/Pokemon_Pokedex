@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.paging.PagingSource
 import androidx.room.withTransaction
 import com.example.pokemon.data.data_source.local.room.PokemonRoomDatabaseProvider
-import com.example.pokemon.domain.repos.PokemonListLocalRepo
 import com.example.pokemon.domain.entities.PokemonEntity
+import com.example.pokemon.domain.repos.PokemonListLocalRepo
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
