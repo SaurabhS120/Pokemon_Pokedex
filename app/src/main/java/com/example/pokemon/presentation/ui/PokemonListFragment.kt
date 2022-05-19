@@ -22,7 +22,7 @@ class PokemonListFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         super.onCreate(savedInstanceState)
         val pokemonListBinding = FragmentPokemonListBinding.inflate(layoutInflater)

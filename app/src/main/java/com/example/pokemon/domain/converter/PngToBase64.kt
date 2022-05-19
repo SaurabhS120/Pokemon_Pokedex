@@ -9,7 +9,6 @@ object PngToBase64 : Converter<Bitmap, String> {
         val baos = ByteArrayOutputStream()
         obj.compress(Bitmap.CompressFormat.PNG, 100, baos) // bm is the bitmap object
         val byteArrayImage: ByteArray = baos.toByteArray()
-        val encodedImage: String = Base64.encodeToString(byteArrayImage, Base64.DEFAULT)
-        return encodedImage
+        return Base64.encodeToString(byteArrayImage, Base64.DEFAULT)
     }
 }

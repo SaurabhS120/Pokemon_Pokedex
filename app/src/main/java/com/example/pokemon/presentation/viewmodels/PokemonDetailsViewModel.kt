@@ -14,7 +14,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PokemonDetailsViewModel @Inject constructor(val remoteRepo: PokemonRemoteRepo) : ViewModel() {
+class PokemonDetailsViewModel @Inject constructor(private val remoteRepo: PokemonRemoteRepo) :
+    ViewModel() {
     val pokemonName = MutableLiveData("Pokemon name")
     val pokemonImagePath = MutableLiveData("")
     val pokemonAbout = MutableLiveData(PokemonAbout("", "", "", ""))
@@ -26,9 +27,9 @@ class PokemonDetailsViewModel @Inject constructor(val remoteRepo: PokemonRemoteR
         baseStats.value = PokemonStats("", "", "", "", "", "", "")
     }
 
-    var pokemonDetails: PokemonDetailsResponse? = null
-        set(pokemonDetails: PokemonDetailsResponse?) {
-            pokemonDetails?.let {
+    private var pokemonDetails: PokemonDetailsResponse? = null
+        set(pokemonDetails) {
+            pokemonDetails?.let { it ->
                 pokemonName.postValue(pokemonDetails.name ?: "")
                 pokemonImagePath.postValue(pokemonDetails.sprites?.other?.home?.front_default ?: "")
 
@@ -39,10 +40,10 @@ class PokemonDetailsViewModel @Inject constructor(val remoteRepo: PokemonRemoteR
                     val abilities = abilities?.let {
                         var str = ""
                         it.forEachIndexed { index, abilitiesItem ->
-                            if (index > 0) {
-                                str = str + " , " + abilitiesItem?.ability?.name ?: ""
+                            str = if (index > 0) {
+                                (str + " , " + abilitiesItem?.ability?.name)
                             } else {
-                                str = str + abilitiesItem?.ability?.name ?: ""
+                                (str + abilitiesItem?.ability?.name)
                             }
                         }
                         str
@@ -60,7 +61,7 @@ class PokemonDetailsViewModel @Inject constructor(val remoteRepo: PokemonRemoteR
                     var total = ""
                     pokemonDetails.stats?.forEach {
                         when (it?.stat?.name) {
-                            "hp" -> hp = it?.baseStat?.toString() ?: ""
+                            "hp" -> hp = it.baseStat?.toString() ?: ""
                             "attack" -> attack = it.baseStat.toString()
                             "defense" -> defence = it.baseStat.toString()
                             "special-attack" -> spAttack = it.baseStat.toString()

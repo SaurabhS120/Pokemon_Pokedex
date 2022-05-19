@@ -11,8 +11,8 @@ import com.example.pokemon.domain.converter.Base64ToByteArray
 import com.example.pokemon.domain.entities.PokemonEntity
 import java.util.*
 
-class PokemonPagingAdapter() :
-    PagingDataAdapter<PokemonEntity, PokemonPagingAdapter.PokemonListViewHolder>(COMPARETOR) {
+class PokemonPagingAdapter :
+    PagingDataAdapter<PokemonEntity, PokemonPagingAdapter.PokemonListViewHolder>(COMPARATOR) {
     private var listener: ((pokemonEntity: PokemonEntity?) -> Unit)? = {}
     fun setOnClickListener(listener: (pokemonEntity: PokemonEntity?) -> Unit) {
         this.listener = listener
@@ -46,7 +46,7 @@ class PokemonPagingAdapter() :
     }
 
     companion object {
-        val COMPARETOR = object : DiffUtil.ItemCallback<PokemonEntity>() {
+        val COMPARATOR = object : DiffUtil.ItemCallback<PokemonEntity>() {
             override fun areItemsTheSame(oldItem: PokemonEntity, newItem: PokemonEntity): Boolean {
                 return oldItem.name == newItem.name
             }

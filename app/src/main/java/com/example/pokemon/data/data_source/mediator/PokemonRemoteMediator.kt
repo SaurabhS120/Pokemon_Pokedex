@@ -49,7 +49,7 @@ class PokemonRemoteMediator(
                     // valid for initial load. If lastItem is null it means no
                     // items were loaded after the initial REFRESH and there are
                     // no more items to load.
-                    if (state.anchorPosition ?: 0 > 1 && lastItem == null) {
+                    if ((state.anchorPosition ?: 0) > 1 && lastItem == null) {
                         return MediatorResult.Success(
                             endOfPaginationReached = true
                         )
@@ -58,7 +58,7 @@ class PokemonRemoteMediator(
                             endOfPaginationReached = false
                         )
                     }
-                    lastItem?.id
+                    lastItem.id
                 }
             }
 
@@ -80,22 +80,20 @@ class PokemonRemoteMediator(
                     viewModelScope.async(Dispatchers.IO) {
                         var base64Image = it.imageBase64
                         if (base64Image == null || base64Image == "") {
-                            val urlParts = it?.url?.split('/')
-                            val pokemonId = urlParts?.get(urlParts.lastIndex - 1)?.toInt() ?: 1
+                            val urlParts = it.url.split('/')
+                            val pokemonId = urlParts.get(urlParts.lastIndex - 1).toInt()
                             val pokemonDetails = remoteRepo.getPokemonDetails(pokemonId)
                             val pokemonImageUrl =
                                 pokemonDetails.sprites!!.other!!.home!!.front_default!!
                             val bm = BitmapFactory.decodeStream(URL(pokemonImageUrl).openStream())
                             val smallBitmap = Bitmap.createScaledBitmap(bm, 200, 200, true)
                             base64Image = PngToBase64.convert(smallBitmap)
-                            it?.id?.let { localRepo.updateImage(it, base64Image) }
+                            it.id?.let { localRepo.updateImage(it, base64Image) }
                         }
                         it.imageBase64 = base64Image
                     }
                 }.awaitAll()
-                response.results!!.let {
-                    localRepo.insertAll(it)
-                }
+                localRepo.insertAll(response.results)
             }
 
             MediatorResult.Success(

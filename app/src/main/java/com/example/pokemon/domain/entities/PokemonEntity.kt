@@ -9,5 +9,5 @@ open class PokemonEntity(
     var id: Int? = null,
     val name: String,
     val url: String,
-    var imageBase64: String = ""
+    var imageBase64: String? = ""
 )

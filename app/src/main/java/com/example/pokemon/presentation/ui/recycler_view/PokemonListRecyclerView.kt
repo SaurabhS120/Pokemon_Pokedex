@@ -10,8 +10,8 @@ class PokemonListRecyclerView(
     pokemonListFragment: PokemonListFragment
 ) {
 
-    val pokemonListViewModel = pokemonListFragment.pokemonListViewModel
-    val adapter = pokemonListViewModel.pokemonListRecyclerAdapter
+    private val pokemonListViewModel = pokemonListFragment.pokemonListViewModel
+    private val adapter = pokemonListViewModel.pokemonListRecyclerAdapter
 
     init {
         pokemonListRecyclerView.layoutManager = GridLayoutManager(pokemonListFragment.context, 2)

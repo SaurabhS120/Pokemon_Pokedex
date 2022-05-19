@@ -1,5 +1,5 @@
 package com.example.pokemon.data.config
 
 object PokemonPageConfig {
-    val PAGE_SIZE = 20
+    const val PAGE_SIZE = 20
 }

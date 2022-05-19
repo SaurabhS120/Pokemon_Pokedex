@@ -20,7 +20,7 @@ class PokemonEntityParcel(
         pokemonEntity.id,
         pokemonEntity.name,
         pokemonEntity.url,
-        pokemonEntity.imageBase64
+        pokemonEntity.imageBase64 ?: ""
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -44,13 +44,5 @@ class PokemonEntityParcel(
             return arrayOfNulls(size)
         }
 
-        fun createFromEntity(pokemonEntity: PokemonEntity): Parcel {
-            val parcel = Parcel.obtain()
-            parcel.writeInt(pokemonEntity.id ?: 0)
-            parcel.writeString(pokemonEntity.name)
-            parcel.writeString(pokemonEntity.url)
-            parcel.writeString(pokemonEntity.imageBase64)
-            return parcel
-        }
     }
 }

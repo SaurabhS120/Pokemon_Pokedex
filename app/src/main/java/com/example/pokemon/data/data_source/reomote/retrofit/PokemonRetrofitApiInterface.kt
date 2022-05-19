@@ -9,7 +9,7 @@ import retrofit2.http.Query
 
 interface PokemonRetrofitApiInterface {
     companion object {
-        val PAGE_SIZE = PokemonPageConfig.PAGE_SIZE
+        const val PAGE_SIZE = PokemonPageConfig.PAGE_SIZE
     }
 
     @GET("pokemon/")

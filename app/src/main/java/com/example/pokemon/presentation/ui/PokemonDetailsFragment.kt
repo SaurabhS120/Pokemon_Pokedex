@@ -20,13 +20,13 @@ import java.util.*
 
 @AndroidEntryPoint
 class PokemonDetailsFragment : Fragment() {
-    val args: PokemonDetailsFragmentArgs by navArgs()
-    val pokemonDetailsViewModel: PokemonDetailsViewModel by activityViewModels()
+    private val args: PokemonDetailsFragmentArgs by navArgs()
+    private val pokemonDetailsViewModel: PokemonDetailsViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         val pokemonDetailsBinding = FragmentPokemonDetailsBinding.inflate(layoutInflater)
         pokemonDetailsBinding.backButton.setOnClickListener {
@@ -35,8 +35,7 @@ class PokemonDetailsFragment : Fragment() {
         pokemonDetailsBinding.tabs.addOnTabSelectedListener(object :
             TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                val tabName = tab?.text.toString() ?: ""
-                when (tabName) {
+                when (tab?.text.toString()) {
                     getString(R.string.about) -> {
                         pokemonDetailsBinding.detailFragmentContainer.findNavController()
                             .navigate(R.id.pokemonDetailsAboutAction)
@@ -54,13 +53,13 @@ class PokemonDetailsFragment : Fragment() {
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
         pokemonDetailsViewModel.apply {
-            pokemonName.observe(viewLifecycleOwner) {
+            pokemonName.observe(viewLifecycleOwner) { it ->
                 if (it != null && it != "") {
-                    pokemonDetailsBinding.pokemonName.setText(it.replaceFirstChar {
+                    pokemonDetailsBinding.pokemonName.text = it.replaceFirstChar {
                         if (it.isLowerCase()) it.titlecase(
                             Locale.getDefault()
                         ) else it.toString()
-                    })
+                    }
                 }
             }
             pokemonImagePath.observe(viewLifecycleOwner) {
@@ -76,7 +75,7 @@ class PokemonDetailsFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         pokemonDetailsViewModel.reset()
-        val pokemonEntity: PokemonEntityParcel? = args.pokemonEntityParcel
+        val pokemonEntity: PokemonEntityParcel = args.pokemonEntityParcel
         pokemonDetailsViewModel.loadDetails(pokemonEntity)
     }
 }
