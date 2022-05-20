@@ -78,7 +78,7 @@ class PokemonRemoteMediator(
                     viewModelScope.async(Dispatchers.IO) {
                         var base64Image = it.imageBase64
                         if (base64Image == null || base64Image == "") {
-                            val base64Image = pokemonBase64Usecase.call(it.url)
+                            base64Image = pokemonBase64Usecase.call(it.url)
                             it.id?.let { localRepo.updateImage(it, base64Image) }
                         }
                         it.imageBase64 = base64Image
