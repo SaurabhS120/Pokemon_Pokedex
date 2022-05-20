@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pokemon.databinding.PokemonSmallCardBinding
 import com.example.pokemon.domain.converter.Base64ToByteArray
-import com.example.pokemon.domain.entities.PokemonEntity
+import com.example.pokemon.data.entity.PokemonListEntity
 import java.util.*
 
 class PokemonPagingAdapter :
-    PagingDataAdapter<PokemonEntity, PokemonPagingAdapter.PokemonListViewHolder>(COMPARATOR) {
-    private var listener: ((pokemonEntity: PokemonEntity?) -> Unit)? = {}
-    fun setOnClickListener(listener: (pokemonEntity: PokemonEntity?) -> Unit) {
+    PagingDataAdapter<PokemonListEntity, PokemonPagingAdapter.PokemonListViewHolder>(COMPARATOR) {
+    private var listener: ((pokemonListEntity: PokemonListEntity?) -> Unit)? = {}
+    fun setOnClickListener(listener: (pokemonListEntity: PokemonListEntity?) -> Unit) {
         this.listener = listener
     }
 
@@ -46,14 +46,14 @@ class PokemonPagingAdapter :
     }
 
     companion object {
-        val COMPARATOR = object : DiffUtil.ItemCallback<PokemonEntity>() {
-            override fun areItemsTheSame(oldItem: PokemonEntity, newItem: PokemonEntity): Boolean {
+        val COMPARATOR = object : DiffUtil.ItemCallback<PokemonListEntity>() {
+            override fun areItemsTheSame(oldItem: PokemonListEntity, newItem: PokemonListEntity): Boolean {
                 return oldItem.name == newItem.name
             }
 
             override fun areContentsTheSame(
-                oldItem: PokemonEntity,
-                newItem: PokemonEntity
+                oldItem: PokemonListEntity,
+                newItem: PokemonListEntity
             ): Boolean {
                 return oldItem.equals(newItem)
             }

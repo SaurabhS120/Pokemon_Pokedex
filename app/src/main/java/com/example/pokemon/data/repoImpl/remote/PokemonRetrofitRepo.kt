@@ -2,8 +2,8 @@ package com.example.pokemon.data.repoImpl.remote
 
 import com.example.pokemon.data.config.PokemonPageConfig
 import com.example.pokemon.data.data_source.reomote.retrofit.PokemonRetrofitApiProvider
-import com.example.pokemon.data.model.PokemonDetailsResponse
-import com.example.pokemon.data.model.PokemonResponse
+import com.example.pokemon.data.entity.PokemonDetailsEntity
+import com.example.pokemon.data.data_source.reomote.retrofit.response.PokemonResponse
 import com.example.pokemon.domain.repos.PokemonRemoteRepo
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -19,7 +19,7 @@ class PokemonRetrofitRepo @Inject constructor() : PokemonRemoteRepo {
     override suspend fun getPokemonList(pageNo: Int): PokemonResponse =
         retrofitApi.getPokemonList(PokemonPageConfig.PAGE_SIZE * pageNo)
 
-    override suspend fun getPokemonDetails(id: Int): PokemonDetailsResponse =
-        retrofitApi.getPokemonDetails(id)
+    override suspend fun getPokemonDetails(id: Int): PokemonDetailsEntity =
+        PokemonDetailsEntity(retrofitApi.getPokemonDetails(id))
 
 }

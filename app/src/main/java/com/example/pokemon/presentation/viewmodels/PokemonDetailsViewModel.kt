@@ -3,9 +3,9 @@ package com.example.pokemon.presentation.viewmodels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.pokemon.data.model.PokemonDetailsResponse
 import com.example.pokemon.domain.entities.PokemonAbout
-import com.example.pokemon.domain.entities.PokemonEntity
+import com.example.pokemon.data.entity.PokemonDetailsEntity
+import com.example.pokemon.data.entity.PokemonListEntity
 import com.example.pokemon.domain.entities.PokemonStats
 import com.example.pokemon.domain.repos.PokemonRemoteRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,61 +27,23 @@ class PokemonDetailsViewModel @Inject constructor(private val remoteRepo: Pokemo
         baseStats.value = PokemonStats("", "", "", "", "", "", "")
     }
 
-    private var pokemonDetails: PokemonDetailsResponse? = null
+    private var pokemonDetails: PokemonDetailsEntity? = null
         set(pokemonDetails) {
             pokemonDetails?.let { it ->
-                pokemonName.postValue(pokemonDetails.name ?: "")
-                pokemonImagePath.postValue(pokemonDetails.sprites?.other?.home?.front_default ?: "")
-
-                pokemonAbout.postValue(with(pokemonDetails) {
-                    val species = species?.name ?: ""
-                    val height = height?.toString() ?: ""
-                    val weight = weight?.toString() ?: ""
-                    val abilities = abilities?.let {
-                        var str = ""
-                        it.forEachIndexed { index, abilitiesItem ->
-                            str = if (index > 0) {
-                                (str + " , " + abilitiesItem?.ability?.name)
-                            } else {
-                                (str + abilitiesItem?.ability?.name)
-                            }
-                        }
-                        str
-                    } ?: ""
-                    PokemonAbout(species, height, weight, abilities)
-                })
-                baseStats.postValue(with(pokemonDetails) {
-
-                    var hp = ""
-                    var attack = ""
-                    var defence = ""
-                    var spAttack = ""
-                    var spDefence = ""
-                    var speed = ""
-                    var total = ""
-                    pokemonDetails.stats?.forEach {
-                        when (it?.stat?.name) {
-                            "hp" -> hp = it.baseStat?.toString() ?: ""
-                            "attack" -> attack = it.baseStat.toString()
-                            "defense" -> defence = it.baseStat.toString()
-                            "special-attack" -> spAttack = it.baseStat.toString()
-                            "special-defense" -> spDefence = it.baseStat.toString()
-                            "speed" -> speed = it.baseStat.toString()
-                            "total" -> total = it.baseStat.toString()
-                        }
-                    }
-                    PokemonStats(hp, attack, defence, spAttack, spDefence, speed, total)
-                })
+                pokemonName.postValue(it.pokemonName ?: "")
+                pokemonImagePath.postValue(it.pokemonImagePath)
+                pokemonAbout.postValue(it.pokemonAbout)
+                baseStats.postValue(it.pokemonStats)
                 field = it
                 return
             }
             field = null
         }
 
-    fun loadDetails(pokemonEntity: PokemonEntity?) {
-        pokemonEntity?.let {
+    fun loadDetails(pokemonListEntity: PokemonListEntity?) {
+        pokemonListEntity?.let {
             viewModelScope.launch(Dispatchers.IO) {
-                pokemonDetails = remoteRepo.getPokemonDetails(pokemonEntity.id ?: 0)
+                pokemonDetails = remoteRepo.getPokemonDetails(pokemonListEntity.id ?: 0)
             }
 
         }

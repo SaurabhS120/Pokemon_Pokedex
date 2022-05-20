@@ -5,15 +5,15 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.pokemon.domain.entities.PokemonEntity
+import com.example.pokemon.data.data_source.local.room.entity.PokemonRoomEntity
 
 @Dao
 interface PokemonDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(pokemons: List<PokemonEntity>)
+    suspend fun insertAll(pokemons: List<PokemonRoomEntity>)
 
     @Query("SELECT * FROM pokemons")
-    fun pagingSource(): PagingSource<Int, PokemonEntity>
+    fun pagingSource(): PagingSource<Int, PokemonRoomEntity>
 
     @Query("DELETE FROM pokemons")
     suspend fun clearAll()

@@ -1,8 +1,9 @@
 package com.example.pokemon.presentation.ui.recycler_view
 
+import androidx.paging.map
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pokemon.domain.entities.PokemonEntity
+import com.example.pokemon.data.entity.PokemonListEntity
 import com.example.pokemon.presentation.ui.PokemonListFragment
 
 class PokemonListRecyclerView(
@@ -19,13 +20,13 @@ class PokemonListRecyclerView(
         pokemonListViewModel.pokemonList.observe(pokemonListFragment) {
             adapter.submitData(
                 pokemonListFragment.lifecycle,
-                it
+                it.map { it.toPokemonListEntity() }
             )
         }
 
     }
 
-    fun setOnclickListener(listener: (pokemonEntity: PokemonEntity?) -> Unit) {
+    fun setOnclickListener(listener: (pokemonListEntity: PokemonListEntity?) -> Unit) {
         adapter.setOnClickListener(listener)
     }
 }

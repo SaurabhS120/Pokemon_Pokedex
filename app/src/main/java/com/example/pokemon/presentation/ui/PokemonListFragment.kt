@@ -9,8 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.example.pokemon.R
 import com.example.pokemon.databinding.FragmentPokemonListBinding
-import com.example.pokemon.domain.entities.PokemonEntity
-import com.example.pokemon.domain.entities.PokemonEntityParcel
+import com.example.pokemon.data.entity.PokemonListEntity
 import com.example.pokemon.presentation.ui.recycler_view.PokemonListRecyclerView
 import com.example.pokemon.presentation.viewmodels.PokemonListViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,12 +29,11 @@ class PokemonListFragment : Fragment() {
             pokemonListBinding.pokemonListRecyclerView,
             this
         )
-        pokemonListRecyclerView.setOnclickListener { pokemonEntity: PokemonEntity? ->
-            val pokemonEntityParcel =
-                PokemonEntityParcel(pokemonEntity ?: PokemonEntity(-1, "", "", ""))
+        pokemonListRecyclerView.setOnclickListener { pokemonListEntityTemp: PokemonListEntity? ->
+            val pokemonListEntity = pokemonListEntityTemp ?: PokemonListEntity(-1, "", "", "")
             val action =
                 PokemonListFragmentDirections.actionPokemonListFragmentToPokemonDetailsFragment(
-                    pokemonEntityParcel
+                    pokemonListEntity
                 )
             activity?.findNavController(R.id.mainFragmentContainerView)?.navigate(action)
 //            val intent = Intent(this,PokemonDetailsFragment::class.java)

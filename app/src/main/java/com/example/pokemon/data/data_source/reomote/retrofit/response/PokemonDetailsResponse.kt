@@ -1,4 +1,4 @@
-package com.example.pokemon.data.model
+package com.example.pokemon.data.data_source.reomote.retrofit.response
 
 import com.google.gson.annotations.SerializedName
 
