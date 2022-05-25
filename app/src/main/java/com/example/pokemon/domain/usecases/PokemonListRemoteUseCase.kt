@@ -9,5 +9,5 @@ import javax.inject.Inject
 @Module
 @InstallIn(SingletonComponent::class)
 class PokemonListRemoteUseCase @Inject constructor(private val remoteRepo: PokemonRemoteRepo) {
-    suspend fun call(pageNo:Int) = remoteRepo.getPokemonList(pageNo)
+    suspend fun invoke(pageNo:Int) = remoteRepo.getPokemonList(pageNo)
 }

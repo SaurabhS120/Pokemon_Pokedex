@@ -56,7 +56,7 @@ class PokemonRemoteMediator(
                             endOfPaginationReached = false
                         )
                     }
-                    lastItem.id
+                    lastItem.id?.inc()
                 }
             }
 
@@ -64,7 +64,7 @@ class PokemonRemoteMediator(
             // wrapped in a withContext(Dispatcher.IO) { ... } block since
             // Retrofit's Coroutine CallAdapter dispatches on a worker
             // thread.
-            val response = pokemonListRemoteUseCase.call(((loadKey ?: 0) + 1) / state.config.pageSize)
+            val response = pokemonListRemoteUseCase.invoke((loadKey?:1) / state.config.pageSize)
 
             localRepo.withTransaction {
                 if (loadType == LoadType.REFRESH) {
@@ -78,7 +78,7 @@ class PokemonRemoteMediator(
                     viewModelScope.async(Dispatchers.IO) {
                         var base64Image = it.imageBase64
                         if (base64Image == null || base64Image == "") {
-                            base64Image = pokemonBase64Usecase.call(it.url)
+                            base64Image = pokemonBase64Usecase.invoke(it.url)
                             it.id?.let { localRepo.updateImage(it, base64Image) }
                         }
                         it.imageBase64 = base64Image

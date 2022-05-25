@@ -1,8 +1,7 @@
-package com.example.pokemon.data.entity
+package com.example.pokemon.domain.entities
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.example.pokemon.data.data_source.local.room.entity.PokemonRoomEntity
 
 open class PokemonListEntity(
     var id: Int? = null,
@@ -47,5 +46,4 @@ open class PokemonListEntity(
         }
 
     }
-    fun toPokemonEntity() = PokemonRoomEntity(id, name, url, imageBase64)
 }

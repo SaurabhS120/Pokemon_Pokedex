@@ -20,6 +20,6 @@
         tools:layout="@layout/fragment_pokemon_details" >
         <argument
             android:name="pokemonListEntity"
-            app:argType="com.example.pokemon.data.entity.PokemonListEntity"/>
+            app:argType="com.example.pokemon.domain.entities.PokemonListEntity"/>
     </fragment>
 </navigation>

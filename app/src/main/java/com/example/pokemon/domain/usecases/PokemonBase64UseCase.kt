@@ -12,10 +12,10 @@ import javax.inject.Inject
 @Module
 @InstallIn(SingletonComponent::class)
 class PokemonBase64UseCase @Inject constructor(val pokemonDetailsUseCase: PokemonDetailsUseCase) {
-    suspend fun call(url:String):String{
+    suspend fun invoke(url:String):String{
         val urlParts = url.split('/')
         val pokemonId = urlParts.get(urlParts.lastIndex - 1).toInt()
-        val pokemonDetails = pokemonDetailsUseCase.call(pokemonId)
+        val pokemonDetails = pokemonDetailsUseCase.invoke(pokemonId)
         val pokemonImageUrl =pokemonDetails.pokemonImagePath
         val bm = BitmapFactory.decodeStream(URL(pokemonImageUrl).openStream())
         val smallBitmap = Bitmap.createScaledBitmap(bm, 200, 200, true)

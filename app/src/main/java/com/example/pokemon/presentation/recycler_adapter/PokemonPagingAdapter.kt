@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pokemon.databinding.PokemonSmallCardBinding
 import com.example.pokemon.domain.converter.Base64ToByteArray
-import com.example.pokemon.data.entity.PokemonListEntity
+import com.example.pokemon.domain.entities.PokemonListEntity
 import java.util.*
 
 class PokemonPagingAdapter :

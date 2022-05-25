@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.example.pokemon.R
 import com.example.pokemon.databinding.FragmentPokemonListBinding
-import com.example.pokemon.data.entity.PokemonListEntity
+import com.example.pokemon.domain.entities.PokemonListEntity
 import com.example.pokemon.presentation.ui.recycler_view.PokemonListRecyclerView
 import com.example.pokemon.presentation.viewmodels.PokemonListViewModel
 import dagger.hilt.android.AndroidEntryPoint

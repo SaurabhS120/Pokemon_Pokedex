@@ -2,7 +2,7 @@ package com.example.pokemon.domain.repos
 
 import androidx.paging.PagingSource
 import com.example.pokemon.data.data_source.local.room.entity.PokemonRoomEntity
-import com.example.pokemon.data.entity.PokemonListEntity
+import com.example.pokemon.domain.entities.PokemonListEntity
 
 interface PokemonListLocalRepo {
     suspend fun insertAll(pokemons: List<PokemonListEntity>)

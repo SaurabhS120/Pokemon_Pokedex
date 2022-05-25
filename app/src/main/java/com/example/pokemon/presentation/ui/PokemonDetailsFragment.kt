@@ -11,7 +11,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.pokemon.R
-import com.example.pokemon.data.entity.PokemonListEntity
+import com.example.pokemon.domain.entities.PokemonListEntity
 import com.example.pokemon.databinding.FragmentPokemonDetailsBinding
 import com.example.pokemon.presentation.viewmodels.PokemonDetailsViewModel
 import com.google.android.material.tabs.TabLayout

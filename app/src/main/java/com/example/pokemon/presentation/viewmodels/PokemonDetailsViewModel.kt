@@ -4,8 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pokemon.domain.entities.PokemonAbout
-import com.example.pokemon.data.entity.PokemonDetailsEntity
-import com.example.pokemon.data.entity.PokemonListEntity
+import com.example.pokemon.domain.entities.PokemonDetailsEntity
+import com.example.pokemon.domain.entities.PokemonListEntity
 import com.example.pokemon.domain.entities.PokemonStats
 import com.example.pokemon.domain.repos.PokemonRemoteRepo
 import dagger.hilt.android.lifecycle.HiltViewModel

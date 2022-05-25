@@ -5,7 +5,7 @@ import androidx.paging.PagingSource
 import androidx.room.withTransaction
 import com.example.pokemon.data.data_source.local.room.PokemonRoomDatabaseProvider
 import com.example.pokemon.data.data_source.local.room.entity.PokemonRoomEntity
-import com.example.pokemon.data.entity.PokemonListEntity
+import com.example.pokemon.domain.entities.PokemonListEntity
 import com.example.pokemon.domain.repos.PokemonListLocalRepo
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -21,7 +21,7 @@ class PokemonRoomDatabaseRepo @Inject constructor(@ApplicationContext applicatio
     private val pokemonDatabase = PokemonRoomDatabaseProvider.getDatabase(applicationContext)
     private val pokemonDao = pokemonDatabase.pokemonDao()
 
-    override suspend fun insertAll(pokemons: List<PokemonListEntity>) = pokemonDao.insertAll(pokemons.map { it.toPokemonEntity() })
+    override suspend fun insertAll(pokemons: List<PokemonListEntity>) = pokemonDao.insertAll(pokemons.map { PokemonRoomEntity.fromPokemonListEntity(it) })
     override fun pagingSource(): PagingSource<Int, PokemonRoomEntity> = pokemonDao.pagingSource()
     override suspend fun clearAll() = pokemonDao.clearAll()
     override suspend fun updateImage(id: Int, image: String) = pokemonDao.updateImage(id, image)

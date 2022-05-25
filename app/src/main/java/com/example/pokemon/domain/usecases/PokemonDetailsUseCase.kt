@@ -10,5 +10,5 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class PokemonDetailsUseCase @Inject constructor(private val remoteRepo: PokemonRemoteRepo) {
-    suspend fun call(id:Int) = remoteRepo.getPokemonDetails(id)
+    suspend fun invoke(id:Int) = remoteRepo.getPokemonDetails(id)
 }
