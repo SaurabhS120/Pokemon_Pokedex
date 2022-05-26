@@ -1,4 +1,4 @@
-package com.example.pokemon.presentation
+package com.example.pokemon.presentation.customComponents
 
 import android.content.Context
 import android.graphics.Canvas

@@ -131,16 +131,15 @@
                         </com.google.android.material.tabs.TabLayout>
                     </HorizontalScrollView>
 
-                    <androidx.fragment.app.FragmentContainerView
-                        android:id="@+id/detailFragmentContainer"
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/detailViewPager"
                         android:name="androidx.navigation.fragment.NavHostFragment"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_marginBottom="2dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tabs_scroll_view"
-                        app:navGraph="@navigation/details_tab_navigation" />
+                        app:layout_constraintTop_toBottomOf="@id/tabs_scroll_view" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
