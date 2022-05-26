@@ -8,13 +8,14 @@ import com.example.pokemon.domain.entities.PokemonDetailsEntity
 import com.example.pokemon.domain.entities.PokemonListEntity
 import com.example.pokemon.domain.entities.PokemonStats
 import com.example.pokemon.domain.repos.PokemonRemoteRepo
+import com.example.pokemon.domain.usecases.PokemonDetailsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PokemonDetailsViewModel @Inject constructor(private val remoteRepo: PokemonRemoteRepo) :
+class PokemonDetailsViewModel @Inject constructor(private val pokemonDetailsUseCase: PokemonDetailsUseCase) :
     ViewModel() {
     val pokemonName = MutableLiveData("Pokemon name")
     val pokemonImagePath = MutableLiveData("")
@@ -42,8 +43,8 @@ class PokemonDetailsViewModel @Inject constructor(private val remoteRepo: Pokemo
 
     fun loadDetails(pokemonListEntity: PokemonListEntity?) {
         pokemonListEntity?.let {
-            viewModelScope.launch(Dispatchers.IO) {
-                pokemonDetails = remoteRepo.getPokemonDetails(pokemonListEntity.id ?: 0)
+            viewModelScope.launch {
+                pokemonDetails = pokemonDetailsUseCase.invoke(pokemonListEntity.id ?: 0,useCache = true)
             }
 
         }
