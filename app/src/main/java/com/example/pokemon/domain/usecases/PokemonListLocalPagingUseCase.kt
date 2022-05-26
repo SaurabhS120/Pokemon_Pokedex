@@ -7,6 +7,7 @@ import com.example.pokemon.domain.repos.PokemonListPagingMediator
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @Module
@@ -14,5 +15,5 @@ import javax.inject.Inject
 class PokemonListLocalPagingUseCase @Inject constructor(
     private val pokemonListPagingMediator: PokemonListPagingMediator
     ) {
-    fun  invoke(): LiveData<PagingData<PokemonListEntity>> = pokemonListPagingMediator.getPokemons()
+    fun  invoke(): Flow<PagingData<PokemonListEntity>> = pokemonListPagingMediator.getPokemons()
 }

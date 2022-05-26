@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import androidx.paging.*
 import com.example.pokemon.data.config.PokemonPageConfig
-import com.example.pokemon.data.data_source.mediator.PokemonRemoteMediator
+import com.example.pokemon.data.data_source.local.room.mediator.PokemonRoomRemoteMediator
 import com.example.pokemon.data.repoImpl.local.PokemonRoomDatabaseRepo
 import com.example.pokemon.domain.entities.PokemonListEntity
 import com.example.pokemon.domain.repos.PokemonListPagingMediator
@@ -14,6 +14,8 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 @Module
@@ -24,12 +26,12 @@ class PokemonListRoomPagingRepoImpl @Inject constructor(
     private val pokemonListRemoteUseCase: PokemonListRemoteUseCase,
     private val pokemonBase64Usecase: PokemonBase64UseCase
 ) : PokemonListPagingMediator {
-    override fun getPokemons(coroutineScope: CoroutineScope): LiveData<PagingData<PokemonListEntity>> {
+    override fun getPokemons(coroutineScope: CoroutineScope): Flow<PagingData<PokemonListEntity>> {
         val pagingData = Pager(
             config = PagingConfig(pageSize = PokemonPageConfig.PAGE_SIZE),
-            remoteMediator = PokemonRemoteMediator(roomRepo, coroutineScope,pokemonListRemoteUseCase,pokemonBase64Usecase),
+            remoteMediator = PokemonRoomRemoteMediator(roomRepo, coroutineScope,pokemonListRemoteUseCase,pokemonBase64Usecase),
             pagingSourceFactory = { roomRepo.pagingSource() }
-        ).liveData
+        ).flow
         return pagingData.map { it.map { it.toPokemonListEntity() } }
     }
 }

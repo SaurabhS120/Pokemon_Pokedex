@@ -1,4 +1,4 @@
-package com.example.pokemon.data.data_source.mediator
+package com.example.pokemon.data.data_source.local.room.mediator
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
@@ -16,7 +16,7 @@ import retrofit2.HttpException
 import java.io.IOException
 
 @OptIn(ExperimentalPagingApi::class)
-class PokemonRemoteMediator(
+class PokemonRoomRemoteMediator(
     private val localRepo: PokemonListLocalRepo,
     private val viewModelScope: CoroutineScope,
     private val pokemonListRemoteUseCase: PokemonListRemoteUseCase,
@@ -75,7 +75,7 @@ class PokemonRemoteMediator(
                 // current PagingData, allowing Paging to present the updates
                 // in the DB.
                 response.results!!.map {
-                    viewModelScope.async(Dispatchers.IO) {
+                    viewModelScope.async(Dispatchers.Default) {
                         var base64Image = it.imageBase64
                         if (base64Image == null || base64Image == "") {
                             base64Image = pokemonBase64Usecase.invoke(it.url)
