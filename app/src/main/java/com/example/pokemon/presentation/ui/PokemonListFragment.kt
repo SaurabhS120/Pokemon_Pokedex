@@ -30,18 +30,10 @@ class PokemonListFragment : Fragment() {
             this
         )
         pokemonListRecyclerView.setOnclickListener { pokemonListEntityTemp: PokemonListEntity? ->
-            val pokemonListEntity = pokemonListEntityTemp ?: PokemonListEntity(-1, "", "", "")
+            val pokemonId = pokemonListEntityTemp?.id?:1
             val action =
-                PokemonListFragmentDirections.actionPokemonListFragmentToPokemonDetailsFragment(
-                    pokemonListEntity
-                )
+                PokemonListFragmentDirections.actionPokemonListFragmentToPokemonDetailsFragment(pokemonId)
             activity?.findNavController(R.id.mainFragmentContainerView)?.navigate(action)
-//            val intent = Intent(this,PokemonDetailsFragment::class.java)
-//            val pokemonEntityParcel = pokemonEntity?.let {
-//                val parcel = PokemonEntityParcel(it)
-//                intent.putExtra(PokemonDetailsFragment.POKEMON_DETAILS_KEY,parcel)
-//                startActivity(intent)
-//            }
         }
         return pokemonListBinding.root
     }

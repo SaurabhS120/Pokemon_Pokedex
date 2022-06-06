@@ -70,8 +70,8 @@ class PokemonDetailsFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         pokemonDetailsViewModel.reset()
-        val pokemonEntity: PokemonListEntity = args.pokemonListEntity
-        pokemonDetailsViewModel.loadDetails(pokemonEntity)
+        val pokemonId = args.pokemonId
+        pokemonDetailsViewModel.loadDetails(pokemonId)
     }
     class PokemonDetailsAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
         val pokemonDetailsAboutFragment = PokemonDetailsAboutFragment()

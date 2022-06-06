@@ -41,12 +41,9 @@ class PokemonDetailsViewModel @Inject constructor(private val pokemonDetailsUseC
             field = null
         }
 
-    fun loadDetails(pokemonListEntity: PokemonListEntity?) {
-        pokemonListEntity?.let {
-            viewModelScope.launch {
-                pokemonDetails = pokemonDetailsUseCase.invoke(pokemonListEntity.id ?: 0,useCache = true)
-            }
-
+    fun loadDetails(pokemonId:Int) {
+        viewModelScope.launch {
+            pokemonDetails = pokemonDetailsUseCase.invoke(pokemonId,useCache = true)
         }
     }
 }
